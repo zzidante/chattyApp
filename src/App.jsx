@@ -12,18 +12,18 @@ import MessageList from './MessageList.jsx';
         currentUser: {name: 'Freddy'},
         messages: [
           {
+            key: 1,
             username: 'Cheese',
             content: 'Has anyone seen my marbles?',
           },
           {
+            key: 2,
             username: 'Lettuce',
             content: 'No, I think you lost them. You lost your marbles Cheese. You lost them for good.'
           }
         ]
       };
-    }
-
-    
+    } 
 
 
     render() {
@@ -32,8 +32,8 @@ import MessageList from './MessageList.jsx';
           <nav className="navbar">
             <a href="/" className="navbar-brand">Chatty</a>
           </nav>
-            <MessageList />
-            <Chatbar currentUser = { this.state.currentUser } />
+            <MessageList messages = { this.state.messages} />
+            <Chatbar currentUser = { this.state.currentUser.name } />       {/* pass currentUser.name to Chatbat */}
         </div>
       );
     }
