@@ -39,17 +39,16 @@ import MessageList from './MessageList.jsx';
 
 
     onNewPost(message) {
-      function getRandomNum(min, max) {
-        return Math.random() * (max - min) + min;
+
+      if(message.keyCode===13) { 
+
+        const currentMessage = message.target.value;
+        const username = this.state.currentUser.name;
+
+        this.socket.send(JSON.stringify(currentMessage + ' ' + username));
+
+        message.target.value = '';
       }
-
-        if(message.keyCode===13) {
-          const newMessage = {id: getRandomNum(10, 90), username: this.state.currentUser.name, content: message.target.value };
-          const messages = this.state.messages.concat(newMessage)
-
-          this.setState({messages: messages})   
-          message.target.value = '';
-        }
     }
 
 
