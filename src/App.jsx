@@ -8,44 +8,59 @@ import MessageList from './MessageList.jsx';
 
     constructor(props) {
       super(props);
+
+      this.onNewPost = this.onNewPost.bind(this);
+      this.onNewUsername = this.onNewUsername.bind(this);
+
       this.state = {
-        currentUser: {name: 'Freddy'},
+        currentUser: {
+          name: ''
+        },
         messages: [
           {
-            id: '1',
-            username: 'Cheese',
-            content: 'Has anyone seen my marbles?',
-          },
-          {
-            id: '2',
-            username: 'Lettuce',
-            content: 'No, I think you lost them. You lost your marbles Cheese. You lost them for good.'
-          }
-        ]
+            id: '',
+            username: '',
+            content: ''
+          }]
       };
-      this.onNewPost = this.onNewPost.bind(this);
     }
 
-    
     componentDidMount() {
-      setTimeout(() => {
-        
-        const newMessage = {id: 3, username: 'Michelle', content: 'Hello there!'};
-        const messages = this.state.messages.concat(newMessage)
+      this.socket = new WebSocket('ws://localhost:3001');
 
-        this.setState({messages: messages})   
-      }, 3000);
+      this.socket.onopen = (event) => {
+        this.socket.send('hey from Client!');
+
+        this.socket.addEventListener('message', (message) => {
+          console.log('Message from server ' + message.data)
+        });
+      }
     }
+
 
     onNewPost(message) {
+      function getRandomNum(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
         if(message.keyCode===13) {
-          const newMessage = {id: 19, username: 'George', content: message.target.value };
+          const newMessage = {id: getRandomNum(10, 90), username: this.state.currentUser.name, content: message.target.value };
           const messages = this.state.messages.concat(newMessage)
 
           this.setState({messages: messages})   
           message.target.value = '';
         }
     }
+
+
+    onNewUsername(event) {
+
+      let username = event.target.value; // string of input
+      let name = {name: username}
+
+      this.setState({currentUser: name});
+    }
+
 
     render() {
       return (
@@ -54,7 +69,7 @@ import MessageList from './MessageList.jsx';
             <a href="/" className="navbar-brand">Chatty</a>
           </nav>
           <MessageList messages = { this.state.messages} />
-          <Chatbar currentUser = { this.state.currentUser.name } onNewPost = { this.onNewPost } />       {/* pass currentUser.name to Chatbat */}
+          <Chatbar currentUser = { this.state.currentUser.name } onNewPost = { this.onNewPost } onNewUsername = { this.onNewUsername }/>       {/* pass currentUser.name to Chatbat */}
         </div>
       );
     }
