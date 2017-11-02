@@ -43,9 +43,10 @@ import MessageList from './MessageList.jsx';
       if(message.keyCode===13) { 
 
         const currentMessage = message.target.value;
-        const username = this.state.currentUser.name;
+        const objCurrentMessage = ({content: currentMessage})
+        const username = this.state.currentUser;
 
-        this.socket.send(JSON.stringify(currentMessage + ' ' + username));
+        this.socket.send(JSON.stringify([username, objCurrentMessage]));
 
         message.target.value = '';
       }
