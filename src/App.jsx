@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import uniqueID from 'uuid';
 
 import Chatbar from './Chatbar.jsx';
 import MessageList from './MessageList.jsx';
@@ -21,33 +20,24 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001');
 
     this.socket.onopen = (event) => {
-      console.log('ws was opened', event);
-      this.socket.send("jo mammmmma");
       this.socket.addEventListener('message', (message) => {
-        console.log('Message from server: ' + message.data)
+        let messages = [ ...this.state.messages, JSON.parse(message.data)]
+
+        this.setState({ messages });
+        console.log(this.state);
       });
     }
   }
 
 
-  onNewPost(message) {
-    if(message.keyCode===13) { 
-      const currentUser = this.state.currentUser;
-      const uID = uniqueID();
-      const messages = ([{id:  uID }, {username: currentUser }, {content: message.target.value}])
-
-      this.socket.send(JSON.stringify({currentUser, messages}));
-      message.target.value = '';
-    }
+  onNewPost(content, username) {
+    const messages = ({id:  '',  username: username , content: content})
+    this.socket.send(JSON.stringify({ messages }));
   }
 
 
-  onNewUsername(event) {
-
-    let username = event.target.value; // string    of input
-    let name = {name: username}
-
-    this.setState({currentUser: name});
+  onNewUsername(username) {
+    // this.setState({messages: [{name: username}]});
   }
 
   render() {
