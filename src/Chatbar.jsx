@@ -3,14 +3,13 @@ import React , {Component} from 'react';
 class Chatbar extends Component {
   constructor(props) {
     super(props);
+
+    this.onMessage = this.onMessage.bind(this);
+    this.newUsername = this.newUsername.bind(this);
+
   }
 
-  render() {
-    // const currentUser = this.props.currentUser;   {/* grab currentUser.name from App */}
-    // const onNewPost = this.props.onNewPost;
-    // const onNewUsername = this.props.onNewUsername; 
-
-    const onMessage = (event) => {
+  onMessage(event) {
       event.preventDefault();
       const username = this.refs.username.value;
 
@@ -20,25 +19,30 @@ class Chatbar extends Component {
       }
     }
 
-    const newUsername = (event) => {
-      event.preventDefault();
-      this.props.onNewUsername(event.target.value);
-    }
+  newUsername(event) {
+    console.log("noname: ", this.props.currentUsername)
 
-    
+    if(event.target.value !== this.props.currentUsername) {
+      this.props.onNewUsername(event.target.value);
+      // this.props.sendNameChangeNotification(true);
+    }
+  }
+
+
+  render() {
     return (
       <footer className="chatbar">
         <input 
           className="chatbar-username" 
           placeholder="Your Name (Optional)"
           ref="username" 
-          onBlur={ newUsername }
+          onBlur={ this.newUsername }
         />
 
         <input 
           className="chatbar-message" 
           placeholder="Type a message and hit ENTER" 
-          onKeyUp= { onMessage } 
+          onKeyUp= { this.onMessage } 
         />
       </footer>
     )

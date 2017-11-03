@@ -34,7 +34,8 @@ class App extends Component {
 
 
   onNewUsername(username) {
-    this.setState({currentUser: [{name: username}]});
+    this.setState({currentUser: {name: username}});
+    console.log("state: ", this.state);
   }
 
   render() {
@@ -44,10 +45,11 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages = { this.state.messages } />
-        <Chatbar currentUser = { this.state.currentUser.name } onNewPost = { this.onNewPost } onNewUsername = { this.onNewUsername }/>       {/* pass currentUser.name to Chatbat */}
+        <Chatbar currentUsername = { this.state.currentUser.name } onNewPost = { this.onNewPost } onNewUsername = { this.onNewUsername }/>       {/* pass currentUser.name to Chatbat */}
       </div>
     );
   }
 }
 
 export default App;
+
