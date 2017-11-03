@@ -8,6 +8,7 @@ class App extends Component {
 
     this.onNewPost = this.onNewPost.bind(this);
     this.onNewUsername = this.onNewUsername.bind(this);
+    this.notifyOnUsernameChange = this.notifyOnUsernameChange.bind(this);
 
     this.state = {
       currentUser: { name: 'anonymous' },
@@ -32,10 +33,16 @@ class App extends Component {
     this.socket.send(JSON.stringify({ messages }));  // send the New Post object to server
   }
 
-
   onNewUsername(username) {
     this.setState({currentUser: {name: username}});
-    console.log("state: ", this.state);
+  }
+
+  notifyOnUsernameChange(boolean, newName, oldName) {
+    if (boolean) {
+      const notificationString = `${oldName} changed their name to ${newName}`
+      const notification = ({notification: notificationString, type: 'postNotification' })
+      this.socket.send(JSON.stringify({ messages: notification }));
+    }
   }
 
   render() {
@@ -45,7 +52,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages = { this.state.messages } />
-        <Chatbar currentUsername = { this.state.currentUser.name } onNewPost = { this.onNewPost } onNewUsername = { this.onNewUsername }/>       {/* pass currentUser.name to Chatbat */}
+        <Chatbar currentUsername = { this.state.currentUser.name } notifyOnUsernameChange = {this.notifyOnUsernameChange} onNewPost = { this.onNewPost } onNewUsername = { this.onNewUsername }/>       {/* pass currentUser.name to Chatbat */}
       </div>
     );
   }

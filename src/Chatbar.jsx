@@ -14,17 +14,25 @@ class Chatbar extends Component {
       const username = this.refs.username.value;
 
       if(event.keyCode === 13) { 
-        this.props.onNewPost(event.target.value, username); 
-        event.target.value = '';
+        if(username) {
+          this.props.onNewPost(event.target.value, username); 
+          event.target.value = '';
+        } else {
+          this.props.onNewPost(event.target.value, 'anonymous'); 
+        }
       }
     }
 
   newUsername(event) {
-    console.log("noname: ", this.props.currentUsername)
-
     if(event.target.value !== this.props.currentUsername) {
-      this.props.onNewUsername(event.target.value);
-      // this.props.sendNameChangeNotification(true);
+      if(event.target.value) {
+        this.props.notifyOnUsernameChange(true, event.target.value, this.props.currentUsername);
+        this.props.onNewUsername(event.target.value);
+        // this.props.sendNameChangeNotification(true);
+      } else {
+        this.props.notifyOnUsernameChange(true, 'anonymous', this.props.currentUsername);
+        this.props.onNewUsername(event.target.value);
+      }
     }
   }
 

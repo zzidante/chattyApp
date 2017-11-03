@@ -11,7 +11,7 @@ class Message extends Component {
         </div>
 
         <div className="message system">
-          Freddy logged on.
+          { message.notification }
         </div>
       </div>
     )
