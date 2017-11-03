@@ -19,7 +19,3 @@ class Message extends Component {
 }
   
   export default Message;
-
-
-  // You feed JS Objs as input properties to Components
-  // Components cannot change their own properties

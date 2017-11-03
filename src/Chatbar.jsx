@@ -6,9 +6,9 @@ class Chatbar extends Component {
   }
 
   render() {
-    const currentUser = this.props.currentUser;   {/* grab currentUser.name from App */}
+    // const currentUser = this.props.currentUser;   {/* grab currentUser.name from App */}
     // const onNewPost = this.props.onNewPost;
-    const onNewUsername = this.props.onNewUsername; 
+    // const onNewUsername = this.props.onNewUsername; 
 
     const onMessage = (event) => {
       event.preventDefault();
@@ -32,7 +32,7 @@ class Chatbar extends Component {
           className="chatbar-username" 
           placeholder="Your Name (Optional)"
           ref="username" 
-          onKeyUp={ newUsername }
+          onBlur={ newUsername }
         />
 
         <input 

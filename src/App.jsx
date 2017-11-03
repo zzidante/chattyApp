@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Chatbar from './Chatbar.jsx';
 import MessageList from './MessageList.jsx';
 
@@ -11,7 +10,7 @@ class App extends Component {
     this.onNewUsername = this.onNewUsername.bind(this);
 
     this.state = {
-      currentUser: { name: '' },
+      currentUser: { name: 'anonymous' },
       messages: []
     };
   }
@@ -21,23 +20,21 @@ class App extends Component {
 
     this.socket.onopen = (event) => {
       this.socket.addEventListener('message', (message) => {
-        let messages = [ ...this.state.messages, JSON.parse(message.data)]
-
-        this.setState({ messages });
-        console.log(this.state);
+        let messages = [ ...this.state.messages, JSON.parse(message.data)]  // add new messages to the current state
+        this.setState({ messages });  // update the state with this list
       });
     }
   }
 
 
   onNewPost(content, username) {
-    const messages = ({id:  '',  username: username , content: content})
-    this.socket.send(JSON.stringify({ messages }));
+    const messages = ({type: 'postMessage', username: username , content: content})
+    this.socket.send(JSON.stringify({ messages }));  // send the New Post object to server
   }
 
 
   onNewUsername(username) {
-    // this.setState({messages: [{name: username}]});
+    this.setState({currentUser: [{name: username}]});
   }
 
   render() {
