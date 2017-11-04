@@ -5,7 +5,7 @@
 
 Chatty App is a simple and colorful Instant Messaging, Single Page App that is composed with React. It runs through an Express server using Websockets to make real-time message updates possible!
 
-##Screenshots
+###Screenshots
 
 !["Chatty App!"](https://raw.githubusercontent.com/zzidante/chattyApp/master/src/app_screenshots/Chatty%20App.png)
 
@@ -15,15 +15,12 @@ Chatty App is a simple and colorful Instant Messaging, Single Page App that is c
 2. Start the webpack server in chatty_server with: <run npm start>, default runs on PORT 3001.
 3. Start the chatty app with <npm run start>, default runs on PORT 3000.
 
-```
 npm install
 npm start
 open http://localhost:3000 to run the app
 
 ```
-npm run lint
 
-```
 ### Dependencies
 
 * React
