@@ -31,8 +31,6 @@ class App extends Component {
           let messages = [ ...this.state.messages, dataFromServer]  // add new messages to the current state
           this.setState({ messages });  // update the state with this list
         }
-
-
       });
     }
   }

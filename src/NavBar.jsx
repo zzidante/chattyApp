@@ -10,6 +10,7 @@ class NavBar extends Component {
           <p className="users-online">{ this.props.usersOnline } user online.</p>
         </nav>
       )
+      
     } else {
       return (
         <nav className="navbar">
