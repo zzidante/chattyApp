@@ -8,7 +8,7 @@ Chatty App is a simple and colorful Instant Messaging, Single Page App that is c
 ```
 ##Screenshots
 
-!["Chatty App!"]()
+!["Chatty App!"](https://github.com/zzidante/chattyApp/blob/master/src/app_screenshots/Chatty%20App.png?raw=true)
 
 
 ```
