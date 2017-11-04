@@ -6,7 +6,7 @@ class Message extends Component {
 
     if(message.notification) {
       return ( 
-      <div className="message system">
+        <div className="message system">
           { message.notification }
         </div>
       )

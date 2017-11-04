@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Chatbar from './Chatbar.jsx';
 import MessageList from './MessageList.jsx';
+import NavBar from './Navbar.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -21,12 +22,20 @@ class App extends Component {
 
     this.socket.onopen = (event) => {
       this.socket.addEventListener('message', (message) => {
-        let messages = [ ...this.state.messages, JSON.parse(message.data)]  // add new messages to the current state
-        this.setState({ messages });  // update the state with this list
+        const dataFromServer = JSON.parse(message.data);
+        // console.log("Comes from server ", dataFromServer);
+
+        if(dataFromServer.type === 'clientCount') {
+          this.setState({usersOnline: dataFromServer.serverMessage})
+        } else {
+          let messages = [ ...this.state.messages, dataFromServer]  // add new messages to the current state
+          this.setState({ messages });  // update the state with this list
+        }
+
+
       });
     }
   }
-
 
   onNewPost(content, username) {
     const messages = ({type: 'postMessage', username: username , content: content})
@@ -48,9 +57,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar">
-          <a href="/" className="navbar-brand">Chatty</a>
-        </nav>
+        <NavBar usersOnline = {this.state.usersOnline}/>
         <MessageList messages = { this.state.messages } />
         <Chatbar currentUsername = { this.state.currentUser.name } notifyOnUsernameChange = {this.notifyOnUsernameChange} onNewPost = { this.onNewPost } onNewUsername = { this.onNewUsername }/>       {/* pass currentUser.name to Chatbat */}
       </div>
