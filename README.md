@@ -5,7 +5,6 @@
 
 Chatty App is a simple and colorful Instant Messaging, Single Page App that is composed with React. It runs through an Express server using Websockets to make real-time message updates possible!
 
-```
 ##Screenshots
 
 !["Chatty App!"](https://raw.githubusercontent.com/zzidante/chattyApp/master/src/app_screenshots/Chatty%20App.png)
