@@ -1,20 +1,30 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+@import url("https://fonts.googleapis.com/css?family=Satisfy");
+
+$wrapper: rgb(33, 108, 121);
+$chatty-font: 'Satisfy', cursive;
 
 body {
-  background: white;
-  color: black;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   margin: 70px 0;
+  width: 100wh;
+	height: 90vh;
+	color: #fff;
+	background: linear-gradient(-45deg, #FF7752, #A73C7E, rgb(41, 185, 233), #FFD5AB);
+	background-size: 500% 500%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 12s ease infinite;
+	animation: Gradient 15s ease infinite;
 }
 
 h1 {
-  color: tomato;
+  color: $wrapper;
 }
 
 .chatbar {
-  background: rgb(54, 176, 180);
+  background: $wrapper;
   border-top: 2px solid black;
   bottom: 0;
   display: flex;
@@ -70,7 +80,7 @@ h1 {
 }
 
 .navbar {
-  background: rgb(54, 176, 180);
+  background: $wrapper;
   border-bottom: 2px solid black;
   height: 60px;
   left: 0;
@@ -82,12 +92,55 @@ h1 {
 
 .navbar-brand {
   color: inherit;
+  font-family: $chatty-font;  
   display: block;
   float: left;
-  font-weight: 700;
-  font-size: 28px;
+  font-weight: 600;
+  font-size: 30px;
   height: 60px;
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
+}
+
+.users-online {
+  font-size: 1em;
+  float: right;
+  margin-top: 23px;
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
