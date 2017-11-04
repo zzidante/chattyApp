@@ -3,12 +3,21 @@ import React , {Component} from 'react';
 class NavBar extends Component {
   render() {
 
-    return (
-      <nav className="navbar">
+    if(this.props.usersOnline === 1) {
+      return (
+        <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
-          <p>{ this.props.usersOnline }</p>
-      </nav>
-    )
+          <p className="users-online">{ this.props.usersOnline } user online.</p>
+        </nav>
+      )
+    } else {
+      return (
+        <nav className="navbar">
+          <a href="/" className="navbar-brand">Chatty</a>
+          <p className="users-online">{ this.props.usersOnline } users online.</p>
+        </nav>
+      )
+    }
   }
 }
   
